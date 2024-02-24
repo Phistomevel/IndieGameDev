@@ -21,3 +21,4 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="CollectingTrigger" parent="." instance=ExtResource("2_tl4tb")]
 position = Vector2(-255, 12)
+type = "Standardmesser"

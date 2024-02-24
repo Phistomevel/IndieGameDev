@@ -44,7 +44,11 @@ func _process(delta):
 func _on_area_2d_area_entered(area):
 	if area.get_parent().get_name() == "Player":
 		var playerNode = area.get_parent() 
-		var collectable = load(NameMap[type])
+		var collectableRessource = load(NameMap[type])
+		var collectable = collectableRessource.instantiate()
 		playerNode.add_child(collectable)
+		playerNode.OnUse.connect(collectable.onUse)
+		#playerNode.print_tree_pretty()
 		print("collected")
+		self.queue_free()
 	pass # Replace with function body.
