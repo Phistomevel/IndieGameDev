@@ -10,3 +10,5 @@ script = ExtResource("1_kmmlx")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KnifeArea"]
 build_mode = 1
 polygon = PackedVector2Array(14, 10, 8, 0, -3, -9, 20, -6)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

@@ -5,7 +5,7 @@ extends Node2D
 func _ready():
 	pass # Replace with function body.
 
-func onAttack():
+func onUse():
 	KnifeArea.monitorable = true
 	pass##TODO: make the collisionshape rotate to follow the attack animation, and hide the area again
 

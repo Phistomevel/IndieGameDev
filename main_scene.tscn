@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6mswlvtk1dsw"]
+[gd_scene load_steps=4 format=3 uid="uid://b6mswlvtk1dsw"]
 
 [ext_resource type="PackedScene" uid="uid://jpqodwu5i3eg" path="res://Player/player.tscn" id="1_w0o68"]
+[ext_resource type="PackedScene" uid="uid://dgh8f2r0ej8i2" path="res://CollectingTrigger/collecting_trigger.tscn" id="2_tl4tb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pud8k"]
 size = Vector2(823, 285)
@@ -17,3 +18,6 @@ position = Vector2(-24, 124)
 position = Vector2(-285.5, 132.5)
 shape = SubResource("RectangleShape2D_pud8k")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="CollectingTrigger" parent="." instance=ExtResource("2_tl4tb")]
+position = Vector2(-255, 12)
