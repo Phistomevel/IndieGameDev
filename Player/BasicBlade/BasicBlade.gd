@@ -6,7 +6,7 @@ func _ready():
 	pass # Replace with function body.
 
 func onUse():
-	KnifeArea.monitorable = true
+	$"AnimationPlayer".play("knife_basic")
 	pass##TODO: make the collisionshape rotate to follow the attack animation, and hide the area again
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
