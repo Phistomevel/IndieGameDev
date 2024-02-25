@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6mswlvtk1dsw"]
+[gd_scene load_steps=5 format=3 uid="uid://b6mswlvtk1dsw"]
 
 [ext_resource type="PackedScene" uid="uid://jpqodwu5i3eg" path="res://Player/player.tscn" id="1_w0o68"]
+[ext_resource type="Texture2D" uid="uid://c8qr1esb34j8h" path="res://icon.svg" id="2_hbjro"]
 [ext_resource type="PackedScene" uid="uid://dgh8f2r0ej8i2" path="res://CollectingTrigger/collecting_trigger.tscn" id="2_tl4tb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pud8k"]
-size = Vector2(823, 285)
+size = Vector2(123, 119)
 
 [node name="MainScene" type="Node2D"]
 position = Vector2(447, 148)
@@ -12,13 +13,24 @@ position = Vector2(447, 148)
 [node name="Player" parent="." instance=ExtResource("1_w0o68")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-24, 124)
+z_index = 1
+position = Vector2(-24, 182.01)
+scale = Vector2(5.94, 0.435)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-285.5, 132.5)
+position = Vector2(0.5, -2.5)
 shape = SubResource("RectangleShape2D_pud8k")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(0.505051, -1.14942)
+scale = Vector2(0.960122, 0.951868)
+texture = ExtResource("2_hbjro")
+
 [node name="CollectingTrigger" parent="." instance=ExtResource("2_tl4tb")]
 position = Vector2(-255, 12)
+type = "Butterfly-Messer"
+
+[node name="CollectingTrigger2" parent="." instance=ExtResource("2_tl4tb")]
+position = Vector2(-334, 12)
 type = "Standardmesser"

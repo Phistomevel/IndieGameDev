@@ -1,0 +1,59 @@
+	Roles:
+		[The Red Wine]
+		[The White Wine]
+		[The Champagne]
+		[The Knife]
+	  Initial scene:
+	  
+	[The Knife]:"Hey Guys!"
+	[The Knife]:"Are you having a picnic?"
+	[The Red Wine]:"Um, actually ...."
+	[The Red Wine]:"We were just about to *Dine*"
+	[The Red Wine]:"But we found ourselves lacking in beverages"
+	[The Red Wine]:"Say, [The Knife], you wouldn't happen to include..."
+	[The Red Wine]:"A Corcscrew?"
+	[The Knife]:"Ah... Umm..."
+	[The Knife]:"No, I'm sorry"
+	[The Red Wine]:"Well, i just happen to have seen one [Instructions to find the corcscrew]"
+	[The Red Wine]:"Would you be so kind as to bring it for us?"
+	[The Knife]:"Sure!"
+	[The Red Wine]:"Please hurry! I don't want to disappoint my guests!"
+	
+	  Second Scene:
+	[The Red Wine]:"Ah! [The Knife]!I see you have returned with a corcscrew!"
+	[The Red Wine]:"Could you serve some Drinks?"
+	[The Knife]:"Of course!"
+	[[The Knife] flips out corcscrew]
+	[[The Red Wine], [The White Wine] and [The Champagne] all eat]
+	[The White Wine]:"Ah... That was delicious"
+	[The White Wine]:"[The Knife], you don't happen to have a toothpick?"
+	[The Knife]:"Um.. No, sorry"
+	[The White Wine]:"No worries! I have seen one [Instructions to find the toothpick]"
+	[The White Wine]:"Could you get it for me?"
+	[The Knife]:"Sure!"
+	
+	  Third Scene:
+	[The White Wine]:"Oh! It's [The Knife]! Do you have the toothpick?"
+	[The Knife]:"Here you go!"
+	[The White Wine]:"Thanks a lot!"
+	
+	  Fourth Scene:
+	[The Champagne]:"Hey.. [The Knife], is it?"
+	[The Champagne]:"Listen, this is a little embarrassing..."
+	[The Champagne]:"I was supposed to play the violin tonight..."
+	[The Champagne]:"But i forgot my bow..."
+	[The Champagne]:"Could you get it for me? It is just [Instructions to find the bow]"
+	[The Champagne]:"Thanks a lot"
+	
+	  Fifth Scene:
+	[The Champagne]:"Ah, my bow. Thanks again"
+	[[The Champagne] plays the violin]
+	[The Red Wine]:"Well, this calls for more drinks! [The Knife], if you would be so kind?"
+	[[The Knife] flips out the Corcscrew]
+	[The Champagne]:"Hey! I still need that Bow!"
+	[[The Knife] flips out the Bow]
+	[The White Wine]:"Hey, [The Knife]...? I kinda need that toothpick again...]
+	[The Red Wine]:"My drinks first!"
+	[The Champagne]:"No, my Bow first!"
+	[The White Wine]:"I really need that toothpick"
+	[[The Knife] frantically switches between the toothpick, corcscrew, and bow, before the screen fades to black, and [The Knife] collapses on the ground]

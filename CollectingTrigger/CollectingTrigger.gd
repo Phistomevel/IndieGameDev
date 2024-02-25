@@ -26,13 +26,26 @@ const NameMap = {
 				"Flammenwerfer" : "res://Player/BasicBlade/basic_blade.tscn",
 				"Windrad" : "res://Player/BasicBlade/basic_blade.tscn",
 				"Pipette" : "res://Player/BasicBlade/basic_blade.tscn",
-				"Butterfly-Messer" : "res://Player/BasicBlade/basic_blade.tscn",
+				"Butterfly-Messer" : "res://Player/Butterflymesser/butterflymesser.tscn",
 				"Kompass" : "res://Player/BasicBlade/basic_blade.tscn" 
 } 
-
+const graphicsMap ={
+				"Geigenbogen" : 0, 
+				"Korkenzieher" : 0, 
+				"Zahnstocher" : 0, 
+				"Flaschenöffner" : 0, 
+				"Xray-Lupe" : 0, 
+				"Standardmesser" : 0,
+				"Flammenwerfer" : 0,
+				"Windrad" : 0,
+				"Pipette" : 0,
+				"Butterfly-Messer" : 0,
+				"Kompass" : 0 
+} 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$"Spritearray".frame = graphicsMap[type]
 	pass # Replace with function body.
 
 
@@ -47,7 +60,10 @@ func _on_area_2d_area_entered(area):
 		var collectableRessource = load(NameMap[type])
 		var collectable = collectableRessource.instantiate()
 		playerNode.add_child(collectable)
-		playerNode.OnUse.connect(collectable.onUse)
+		if type != "Butterfly-Messer" && type != "Standardmesser":
+			playerNode.OnUse.connect(collectable.onUse)
+		
+		
 		#playerNode.print_tree_pretty()
 		print("collected")
 		self.queue_free()
