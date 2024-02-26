@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://jpqodwu5i3eg"]
+[gd_scene load_steps=88 format=3 uid="uid://jpqodwu5i3eg"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_trx0l"]
 [ext_resource type="Texture2D" uid="uid://bonfpifxlf58h" path="res://Grafiken/taschenmesser-Sheet.png" id="2_wam5p"]
@@ -257,7 +257,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"double_jump",
-"speed": 15.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -269,7 +269,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rsyho")
 }],
-"loop": true,
+"loop": false,
 "name": &"falling",
 "speed": 5.0
 }, {
@@ -387,6 +387,23 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_qwdec"]
+resource_name = "double_jump"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"double_jump", 1.0, false],
+"method": &"play"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_gk5ia"]
 resource_name = "falling"
 tracks/0/type = "method"
@@ -487,23 +504,6 @@ tracks/0/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_qwdec"]
-resource_name = "double_jump"
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"double_jump", 1.0, false],
-"method": &"play"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s4kpt"]
 _data = {
 "RESET": SubResource("Animation_ugnov"),
@@ -575,25 +575,18 @@ advance_expression = "!isRunning"
 advance_mode = 2
 advance_expression = "isAttacking"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fcyu0"]
-advance_mode = 2
-advance_expression = "isFalling"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nlbt5"]
+switch_mode = 2
 advance_mode = 2
 advance_expression = "!isFalling"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xnulo"]
-advance_mode = 2
-advance_expression = "isFalling&&!jumped"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_grvdw"]
 advance_mode = 2
-advance_expression = "jumped"
+advance_expression = "jumped||isFalling"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0tsqa"]
-switch_mode = 2
 advance_mode = 2
+advance_expression = "justFell"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n1syg"]
 advance_mode = 2
@@ -603,14 +596,31 @@ advance_expression = "isAttacking"
 advance_mode = 2
 advance_expression = "isAttacking"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_udmyp"]
-advance_mode = 2
-advance_expression = "isDoubleJumping
-"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_84i65"]
 switch_mode = 2
 advance_mode = 2
+advance_expression = "!isFalling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3eg5d"]
+advance_mode = 2
+advance_expression = "isDoubleJumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3sic5"]
+advance_mode = 2
+advance_expression = "isFalling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7b6ex"]
+advance_mode = 2
+advance_expression = "isRunning"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ui3q3"]
+advance_mode = 2
+advance_expression = "jumped"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7laqi"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "isFalling"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tsawp"]
 states/End/position = Vector2(892, 89.3333)
@@ -619,8 +629,8 @@ states/attack/node = SubResource("AnimationNodeAnimation_du21d")
 states/attack/position = Vector2(373.333, 220.108)
 states/double_jump/node = SubResource("AnimationNodeAnimation_er7c2")
 states/double_jump/position = Vector2(528.333, -241)
-states/falling/node = SubResource("AnimationNodeAnimation_otug7")
-states/falling/position = Vector2(518, -133.481)
+states/fell/node = SubResource("AnimationNodeAnimation_otug7")
+states/fell/position = Vector2(518, -133.481)
 states/idle/node = SubResource("AnimationNodeAnimation_hl41n")
 states/idle/position = Vector2(373.333, 59.2492)
 states/jumping/node = SubResource("AnimationNodeAnimation_i2bpm")
@@ -628,9 +638,9 @@ states/jumping/position = Vector2(684.442, -133.975)
 states/running/node = SubResource("AnimationNodeAnimation_5a6mi")
 states/running/position = Vector2(688.642, 220.326)
 states/running_start/node = SubResource("AnimationNodeAnimation_tvjyc")
-states/running_start/position = Vector2(688.856, 60.0607)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_c5ylv"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_he8mk"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_7vai2"), "attack", "running", SubResource("AnimationNodeStateMachineTransition_vetf8"), "running", "attack", SubResource("AnimationNodeStateMachineTransition_k4q16"), "idle", "running_start", SubResource("AnimationNodeStateMachineTransition_yt0dl"), "running_start", "running", SubResource("AnimationNodeStateMachineTransition_xgeo3"), "running", "idle", SubResource("AnimationNodeStateMachineTransition_dcxbb"), "running_start", "attack", SubResource("AnimationNodeStateMachineTransition_3d3h3"), "running", "falling", SubResource("AnimationNodeStateMachineTransition_fcyu0"), "falling", "idle", SubResource("AnimationNodeStateMachineTransition_nlbt5"), "idle", "falling", SubResource("AnimationNodeStateMachineTransition_xnulo"), "idle", "jumping", SubResource("AnimationNodeStateMachineTransition_grvdw"), "jumping", "falling", SubResource("AnimationNodeStateMachineTransition_0tsqa"), "falling", "attack", SubResource("AnimationNodeStateMachineTransition_n1syg"), "jumping", "attack", SubResource("AnimationNodeStateMachineTransition_5qq4g"), "falling", "double_jump", SubResource("AnimationNodeStateMachineTransition_udmyp"), "double_jump", "falling", SubResource("AnimationNodeStateMachineTransition_84i65")]
-graph_offset = Vector2(87, -275)
+states/running_start/position = Vector2(793.856, 12.0607)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_c5ylv"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_he8mk"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_7vai2"), "attack", "running", SubResource("AnimationNodeStateMachineTransition_vetf8"), "running", "attack", SubResource("AnimationNodeStateMachineTransition_k4q16"), "idle", "running_start", SubResource("AnimationNodeStateMachineTransition_yt0dl"), "running_start", "running", SubResource("AnimationNodeStateMachineTransition_xgeo3"), "running", "idle", SubResource("AnimationNodeStateMachineTransition_dcxbb"), "running_start", "attack", SubResource("AnimationNodeStateMachineTransition_3d3h3"), "fell", "idle", SubResource("AnimationNodeStateMachineTransition_nlbt5"), "idle", "jumping", SubResource("AnimationNodeStateMachineTransition_grvdw"), "jumping", "fell", SubResource("AnimationNodeStateMachineTransition_0tsqa"), "fell", "attack", SubResource("AnimationNodeStateMachineTransition_n1syg"), "jumping", "attack", SubResource("AnimationNodeStateMachineTransition_5qq4g"), "double_jump", "fell", SubResource("AnimationNodeStateMachineTransition_84i65"), "jumping", "double_jump", SubResource("AnimationNodeStateMachineTransition_3eg5d"), "running", "jumping", SubResource("AnimationNodeStateMachineTransition_3sic5"), "fell", "running_start", SubResource("AnimationNodeStateMachineTransition_7b6ex"), "fell", "jumping", SubResource("AnimationNodeStateMachineTransition_ui3q3"), "double_jump", "jumping", SubResource("AnimationNodeStateMachineTransition_7laqi")]
+graph_offset = Vector2(-321.609, -301.388)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_trx0l")
@@ -664,5 +674,13 @@ tree_root = SubResource("AnimationNodeStateMachine_tsawp")
 advance_expression_base_node = NodePath("../../..")
 anim_player = NodePath("..")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.8
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.8
+
 [connection signal="child_order_changed" from="." to="." method="_on_child_order_changed"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
